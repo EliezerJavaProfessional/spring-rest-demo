@@ -6,23 +6,38 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 //Java Imports
 import java.util.List;
 //Project Imports
 import com.example.springdemo.user_message.UserMessage;
 
+/*
+ * We build this entity with @Entity and have to declare 
+ * Getters, Setters and Constructors, we could add more 
+ * powerful Decorators, but in this case is to clarify the work they do.
+ * 
+ *  @RequiredArgsConstructor .- creates Constructor with Required Arguments
+ *  @EqualsAndHashCode .- creates comparator and HashCode for serialization
+ *  @ToString .- creates the ToString Method
+ *  @Setter .- creates the Setters
+ *  @Getter .- creates the Getters
+ *  @Data .-  encapsulates (@RequiredArgsConstructor, @ToString, @Getter, @Setter, @EqualsAndHashCode)
+ */
 @Entity
+@Table(name="UserAccount")
 public class UserAccount {
+    
     @Id
     @GeneratedValue
     @Column(name="Id")
     private Long id;
     
-    @Column(name="FirstName", nullable=false)
+    @Column(name="FirstName", length = 50, nullable=false)
     private String firstName;
     
-    @Column(name="LastName")
+    @Column(name="LastName", length = 50)
     private String lastName;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)

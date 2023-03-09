@@ -9,10 +9,24 @@ import jakarta.persistence.GeneratedValue;
 //Hibernate Actions
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+//Lombok annotations
+import lombok.Data;
 //Project Imports
 import com.example.springdemo.user_account.UserAccount;
 
+/*
+ * We build this entity with @Entity and @Data to avoid declaring
+ * Getters, Setters and Constructors.
+ * 
+ *  @Data .-  encapsulates (@RequiredArgsConstructor, @ToString, @Getter, @Setter, @EqualsAndHashCode)
+ *  @RequiredArgsConstructor .- creates Constructor with Required Arguments
+ *  @EqualsAndHashCode .- creates comparator and HashCode for serialization
+ *  @ToString .- creates the ToString Method
+ *  @Setter .- creates the Setters
+ *  @Getter .- creates the Getters
+ */
 @Entity
+@Data
 public class UserMessage {
     @Id
     @GeneratedValue
@@ -26,28 +40,4 @@ public class UserMessage {
     
     @Column(name="Message")
     private String message;
-    
-    public UserMessage(){};
-    public UserMessage(Long id, UserAccount userAccount, String message){};
-
-    public Long getId() {return id;}
-    public void setId(Long id) {this.id = id;}
-    
-    public UserAccount getUserAccount() {return userAccount;}
-    public void setUserAccount(UserAccount userAccount) {this.userAccount = userAccount;}
-    
-    public String getMessage() {return message;}
-    public void setMessage(String message) {this.message = message;}
-    
-    
-    @Override
-    public String toString() {
-        StringBuilder buffer = new StringBuilder();
-        buffer.append("{");
-        buffer.append("id:"+id);
-        buffer.append(", user_account:\""+userAccount.toString()+"\"");
-        buffer.append(", message:\""+message+"\"");
-        buffer.append("}");
-        return buffer.toString();
-    }
 }
