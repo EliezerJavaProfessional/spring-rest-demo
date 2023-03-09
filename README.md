@@ -1,5 +1,5 @@
 # spring-rest-demo
-Minimalist Spring Rest Demo with Cors enabled and multiple URI terminators for easier connection.
+Minimalist Spring Rest Demo with Cors enabled, Internal Database and multiple URI terminators for easier connection.
 
 Two entities defined to test parent/child relationships, the repository already has test data.
 

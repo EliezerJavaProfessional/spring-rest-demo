@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 //# Spring Framework Autowired Service
 import org.springframework.beans.factory.annotation.Autowired;
 
+//Enable CORS
 @CrossOrigin
 @RestController
 public class UserAccountController {
+    //Data Repository
     @Autowired
     private UserAccountService userAccountService;
     
@@ -26,25 +28,36 @@ public class UserAccountController {
     //Using multiple endpoints in value to avoid end hypen no end hypen confusion
     @GetMapping(value = {"/rest/user_account","/rest/user_account/"}, produces = "application/json")
 	@ResponseBody
-    public Iterable<UserAccount> getList() {return userAccountService.list();}
+    public Iterable<UserAccount> getList() {
+        return userAccountService.list();
+    }
     
     //Split Get Mapping to use AutoMap of the Response (2/2) Retrieve a single object
     @GetMapping(value = {"/rest/user_account/{id}", "/rest/user_account/{id}/"}, produces = "application/json")
 	@ResponseBody
-    public UserAccount get(@PathVariable(required = true) Long id) {return userAccountService.get(id);}
+    public UserAccount get(@PathVariable(required = true) Long id) {
+        return userAccountService.get(id);
+    }
     
-    //
+    //Insert a new object if id is sent it will be ignored
     @PostMapping(value = {"/rest/user_account","/rest/user_account/"}, consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public UserAccount post(@RequestBody UserAccount userAccount) {return userAccountService.put(userAccount);}
+    public UserAccount post(@RequestBody UserAccount userAccount) {
+        return userAccountService.postAndPut(userAccount);
+    }
 
-    @DeleteMapping(value = {"/rest/user_account/{id}", "/rest/user_account/{id}/"}, produces = "application/json")
-	public void delete(@PathVariable(required = true) Long id) {userAccountService.delete(id);}
-    
-    
-
+    //Update an object
     @PutMapping(value = {"/rest/user_account/{id}", "/rest/user_account/{id}/"}, consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public UserAccount put(@RequestBody UserAccount userAccount) {return userAccountService.put(userAccount);}
+    public UserAccount put(@PathVariable(required = true) Long id, @RequestBody UserAccount userAccount) {
+        //make object id and uri id match
+        userAccount.setId(id);
+        return userAccountService.postAndPut(userAccount);
+    }
 
+    //Delete an object
+    @DeleteMapping(value = {"/rest/user_account/{id}", "/rest/user_account/{id}/"}, produces = "application/json")
+	public void delete(@PathVariable(required = true) Long id) {
+        userAccountService.delete(id);
+    }
 }

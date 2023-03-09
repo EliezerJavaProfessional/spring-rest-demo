@@ -10,6 +10,6 @@ public class UserMessageService {
 
     public Iterable<UserMessage> list() {return userMessageRepository.findAll();}
     public UserMessage get(Long id) {return userMessageRepository.findById(id).get();}
-    public UserMessage put(UserMessage userMessage) {return userMessageRepository.save(userMessage);}
+    public UserMessage postAndPut(UserMessage userMessage) {return userMessageRepository.save(userMessage);}
     public void delete(Long id) {userMessageRepository.deleteById(id);}
 }

@@ -9,6 +9,6 @@ public class UserAccountService {
 
     public Iterable<UserAccount> list() {return userAccountRepository.findAll();}
     public UserAccount get(Long id) {return userAccountRepository.findById(id).get();}
-    public UserAccount put(UserAccount userAccount) {return userAccountRepository.save(userAccount);}
+    public UserAccount postAndPut(UserAccount userAccount) {return userAccountRepository.save(userAccount);}
     public void delete(Long id) {userAccountRepository.deleteById(id);}
 }
