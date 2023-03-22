@@ -43,8 +43,15 @@ public class UserAccount {
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
     private List<UserMessage> userMessages;
 
-    public UserAccount(){};
-    public UserAccount(Long id, String firstName, String lastName){};
+    public UserAccount(){}
+    public UserAccount(Long id){
+        this.id=id;
+    }
+    public UserAccount(Long id, String firstName, String lastName){
+        this.id=id;
+        this.firstName=firstName;
+        this.lastName=lastName;
+    }
 
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
@@ -60,8 +67,8 @@ public class UserAccount {
         StringBuilder buffer = new StringBuilder();
         buffer.append("{");
         buffer.append("id:"+id);
-        buffer.append(", first_name:\""+firstName+"\"");
-        buffer.append(", last_name:\""+lastName+"\"");
+        buffer.append(", firstName:\""+firstName+"\"");
+        buffer.append(", lastName:\""+lastName+"\"");
         buffer.append("}");
         return buffer.toString();
     }

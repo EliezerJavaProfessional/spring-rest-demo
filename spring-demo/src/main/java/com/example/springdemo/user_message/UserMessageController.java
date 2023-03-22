@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 //Parameters, Request and Response Mappings
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.springdemo.user_account.UserAccount;
+
 //# Spring Framework Autowired Service
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,7 +32,13 @@ public class UserMessageController {
     //Using multiple endpoints in value to avoid end hypen no end hypen confusion
     @GetMapping(value = {"/rest/user_message","/rest/user_message/"}, produces = "application/json")
 	@ResponseBody
-    public Iterable<UserMessage> getList() {return userMessageService.list();}
+    public Iterable<UserMessage> getList(
+        @RequestParam(required = false) Long userAccountId, 
+        @RequestParam(required = false) String message, 
+        @RequestParam(required = false) String sort) {
+        UserMessage userMessage = new UserMessage(null, new UserAccount(userAccountId), message);
+        return userMessageService.list(userMessage, sort);
+    }
     
     //Split Get Mapping to use AutoMap of the Response (2/2) Retrieve a single object
     @GetMapping(value = {"/rest/user_message/{id}", "/rest/user_message/{id}/"}, produces = "application/json")
@@ -38,7 +48,10 @@ public class UserMessageController {
     //Insert a new object if id is sent it will be ignored
     @PostMapping(value = {"/rest/user_message","/rest/user_message/"}, consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public UserMessage post(@RequestBody UserMessage userMessage) {return userMessageService.postAndPut(userMessage);}
+    public UserMessage post(@RequestBody UserMessage userMessage) {
+        userMessage.setId(null);
+        return userMessageService.postAndPut(userMessage);
+    }
 
     //Update an object
     @PutMapping(value = {"/rest/user_message/{id}", "/rest/user_message/{id}/"}, consumes = "application/json", produces = "application/json")

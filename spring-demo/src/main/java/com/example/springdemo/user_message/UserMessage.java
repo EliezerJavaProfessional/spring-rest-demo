@@ -40,4 +40,11 @@ public class UserMessage {
     
     @Column(name="Message")
     private String message;
+
+    public UserMessage(){}
+    public UserMessage(Long id, UserAccount userAccount, String message){
+        this.id=id;
+        this.userAccount=userAccount;
+        this.message=message;
+    }
 }

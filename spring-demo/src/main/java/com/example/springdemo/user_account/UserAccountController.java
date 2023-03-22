@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 //Parameters, Request and Response Mappings
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 //# Spring Framework Autowired Service
@@ -28,8 +29,12 @@ public class UserAccountController {
     //Using multiple endpoints in value to avoid end hypen no end hypen confusion
     @GetMapping(value = {"/rest/user_account","/rest/user_account/"}, produces = "application/json")
 	@ResponseBody
-    public Iterable<UserAccount> getList() {
-        return userAccountService.list();
+    public Iterable<UserAccount> getList(
+        @RequestParam(required = false) String firstName, 
+        @RequestParam(required = false) String lastName, 
+        @RequestParam(required = false) String sort) {
+        UserAccount userAccount = new UserAccount(null, firstName, lastName);
+        return userAccountService.list(userAccount, sort);
     }
     
     //Split Get Mapping to use AutoMap of the Response (2/2) Retrieve a single object
@@ -43,6 +48,8 @@ public class UserAccountController {
     @PostMapping(value = {"/rest/user_account","/rest/user_account/"}, consumes = "application/json", produces = "application/json")
     @ResponseBody
     public UserAccount post(@RequestBody UserAccount userAccount) {
+        //reset user id
+        userAccount.setId(null);
         return userAccountService.postAndPut(userAccount);
     }
 
