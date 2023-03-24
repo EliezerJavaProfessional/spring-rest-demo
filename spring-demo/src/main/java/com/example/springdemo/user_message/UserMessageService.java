@@ -13,8 +13,8 @@ public class UserMessageService {
     @Autowired
     private UserMessageRepository userMessageRepository;
 
-    public Iterable<UserMessage> list(UserMessage filter, String sortString) {
-        Example<UserMessage> example = Example.of(filter);
+    public Iterable<UserMessage> list(UserMessage exampleRecord, String sortString) {
+        Example<UserMessage> example = Example.of(exampleRecord);
         Sort sort=Sort.by(Sort.Direction.ASC, "id");
         if(sortString!=null&&!sortString.trim().isEmpty()){
             logger.debug("Change Sort Order");

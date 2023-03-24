@@ -32,8 +32,9 @@ public class UserAccountController {
     public Iterable<UserAccount> getList(
         @RequestParam(required = false) String firstName, 
         @RequestParam(required = false) String lastName, 
+        @RequestParam(required = false) Boolean active, 
         @RequestParam(required = false) String sort) {
-        UserAccount userAccount = new UserAccount(null, firstName, lastName);
+        UserAccount userAccount = new UserAccount(null, firstName, lastName, active);
         return userAccountService.list(userAccount, sort);
     }
     

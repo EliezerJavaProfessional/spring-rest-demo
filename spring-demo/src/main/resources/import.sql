@@ -1,11 +1,11 @@
 
-insert into user_account(id, first_name, last_name) values(1001, 'John', 'Wick');
-insert into user_account(id, first_name, last_name) values(1002, 'John', 'Connor');
-insert into user_account(id, first_name, last_name) values(1003, 'Sarah', 'Connor');
-insert into user_account(id, first_name, last_name) values(1004, 'Sarah', 'Marshall');
-insert into user_account(id, first_name, last_name) values(1005, 'John', 'Smith');
-insert into user_account(id, first_name, last_name) values(1007, 'John', 'Malkovich');
-insert into user_account(id, first_name, last_name) values(1008, 'Forrest', 'Gump');
+insert into user_account(id, first_name, last_name, active) values(1001, 'John', 'Wick', true);
+insert into user_account(id, first_name, last_name, active) values(1002, 'John', 'Connor', true);
+insert into user_account(id, first_name, last_name, active) values(1003, 'Sarah', 'Connor', true);
+insert into user_account(id, first_name, last_name, active) values(1004, 'Sarah', 'Marshall', true);
+insert into user_account(id, first_name, last_name, active) values(1005, 'John', 'Smith', true);
+insert into user_account(id, first_name, last_name, active) values(1007, 'John', 'Malkovich', false);
+insert into user_account(id, first_name, last_name, active) values(1008, 'Forrest', 'Gump', true);
 
 insert into user_message(id, user_account_id, message) values(1001, 1001, 'Message 01');
 insert into user_message(id, user_account_id, message) values(1002, 1001, 'Message 02');

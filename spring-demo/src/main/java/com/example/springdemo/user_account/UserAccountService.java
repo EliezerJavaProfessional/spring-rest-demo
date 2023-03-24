@@ -17,8 +17,8 @@ public class UserAccountService {
         return userAccountRepository.findAll();
     }
     
-    public Iterable<UserAccount> list(UserAccount filter, String sortString) {
-        Example<UserAccount> example = Example.of(filter);
+    public Iterable<UserAccount> list(UserAccount exampleRecord, String sortString) {
+        Example<UserAccount> example = Example.of(exampleRecord);
         Sort sort=Sort.by(Sort.Direction.ASC, "id");
         if(sortString!=null&&!sortString.trim().isEmpty()){
             logger.debug("Change Sort Order");
