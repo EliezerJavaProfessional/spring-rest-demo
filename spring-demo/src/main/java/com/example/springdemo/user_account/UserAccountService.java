@@ -1,4 +1,5 @@
 package com.example.springdemo.user_account;
+//Spring Imports
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
@@ -16,6 +17,12 @@ public class UserAccountService {
     public Iterable<UserAccount> list() {
         return userAccountRepository.findAll();
     }
+
+    //*
+    public Iterable<UserAccount> getTop(Integer top) {
+        return userAccountRepository.findTop(top);
+    }
+    // */
     
     public Iterable<UserAccount> list(UserAccount exampleRecord, String sortString) {
         Example<UserAccount> example = Example.of(exampleRecord);

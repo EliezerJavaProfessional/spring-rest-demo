@@ -37,6 +37,14 @@ public class UserAccountController {
         UserAccount userAccount = new UserAccount(null, firstName, lastName, active);
         return userAccountService.list(userAccount, sort);
     }
+
+    @GetMapping(value = {"/rest/user_account_top","/rest/user_account_top/"}, produces = "application/json")
+	@ResponseBody
+    public Iterable<UserAccount> getTopList(@RequestParam(required = false) Integer top) {
+        if(top==null){top=Integer.valueOf(10);}
+        return userAccountService.getTop(top);
+    }
+
     
     //Split Get Mapping to use AutoMap of the Response (2/2) Retrieve a single object
     @GetMapping(value = {"/rest/user_account/{id}", "/rest/user_account/{id}/"}, produces = "application/json")
